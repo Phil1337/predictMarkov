@@ -6,16 +6,16 @@
 #' @import clickstream
 #' @export
 predictMarkov <- function(pageview_names) {
-  
+
   ## mc loaded on package load
   states <- invisible(clickstream::states(model))
-  
+
   pv_n <- pageview_names[pageview_names %in% states]
-  
+
   startPattern <- new("Pattern", sequence = pv_n)
-  
+
   predit <- predict(model, startPattern)
-  
+
   list(page = predit@sequence,
        probability = predit@probability)
 }
@@ -26,27 +26,27 @@ predictMarkov <- function(pageview_names) {
 #' @export
 #' @import markovchain
 predictNextPage <- function(current_url){
-  
+
   current_url <- current_url[!grepl("undefined", current_url)]
-  
+
   message("Predicting next page for ", current_url)
-  
+
   markovList <-  mcfL$estimate
   out <- try(predict(markovList, newdata = current_url), silent = TRUE)
-  
+
   if(inherits(out, "try-error")){
-    
+
     ## try just with last page
     ll <- length(current_url)
     retry_urls <- current_url[ll]
     out <- try(predict(markovList, newdata = retry_urls), silent = TRUE)
-    
+
     if(inherits(out, "try-error")){
       message("No prediction available")
       return(NULL)
     }
   }
-  
+
   out
 }
 
@@ -61,17 +61,17 @@ predictNextPage <- function(current_url){
 #' @return string_vector with replacements if required
 #' @export
 cleanURL <- function(string_vector, findme, replace=NULL, fixed=TRUE){
-  
+
   if(is.null(replace)) {
     replace <- findme
   } else {
     replace <- replace
   }
-  
+
   if(fixed) findme <- stringr::fixed(findme)
-  
+
   string_vector[stringr::str_detect(string_vector, findme)] <- replace
-  
+
   string_vector
 }
 
@@ -83,9 +83,9 @@ cleanURL <- function(string_vector, findme, replace=NULL, fixed=TRUE){
 #' @return The string_vector with substitutions made
 #' @export
 aggregateVD <- function(string_vector){
-  
+
   string_vector <- as.character(string_vector)
-  
+
   # string_vector[str_detect(string_vector[,pagePath_name], "[0-9]$"),"aggregation"] <- "holiday_listing"
   string_vector <- cleanURL(string_vector, "[0-9]$", replace = "holiday_listing", fixed=FALSE)
   string_vector <- cleanURL(string_vector, "search/result", replace = "search_result")
@@ -118,7 +118,7 @@ aggregateVD <- function(string_vector){
   string_vector <- cleanURL(string_vector, "norge")
   string_vector <- cleanURL(string_vector, "historie")
   string_vector <- cleanURL(string_vector, "england")
-  
+
   string_vector
 }
 
