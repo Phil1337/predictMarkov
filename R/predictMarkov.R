@@ -7,7 +7,7 @@
 #' @export
 predictMarkov <- function(pageview_names) {
 
-  ### mc loaded on package load
+  ## mc loaded on package load
   states <- invisible(clickstream::states(model))
 
   pv_n <- pageview_names[pageview_names %in% states]
