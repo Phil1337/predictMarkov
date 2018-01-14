@@ -14,10 +14,10 @@ predictMarkov <- function(pageview_names) {
 
   startPattern <- new("Pattern", sequence = pv_n)
 
-  predit <- predict(model, startPattern)
+  predict <- predict(model, startPattern)
 
-  list(page = predit@sequence,
-       probability = predit@probability)
+  list(page = predict@sequence,
+       probability = predict@probability)
 }
 
 #' Predict next page model 2
