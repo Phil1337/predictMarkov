@@ -1,6 +1,7 @@
 #' Take some pageviews, output Markov model prediction
 #'
 #' @param pageview_names A character vector of pageview names
+#' @param distance Number of predicted steps
 #'
 #' @return The prediction
 #' @import clickstream
