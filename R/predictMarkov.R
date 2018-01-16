@@ -1,12 +1,11 @@
 #' Take some pageviews, output Markov model prediction
 #'
 #' @param pageview_names A character vector of pageview names
-#' @param distance Number of predicted steps
 #'
 #' @return The prediction
 #' @import clickstream
 #' @export
-predictMarkov <- function(pageview_names, distance) {
+predictMarkov <- function(pageview_names) {
 
   ## mc loaded on package load
   states <- invisible(clickstream::states(model))
@@ -15,7 +14,7 @@ predictMarkov <- function(pageview_names, distance) {
 
   startPattern <- new("Pattern", sequence = pv_n)
 
-  predict <- predict(model, startPattern, dist = distance)
+  predict <- predict(model, startPattern, dist = 2)
 
   list(page = predict@sequence,
        probability = predict@probability)
