@@ -1,10 +1,10 @@
-Package: predictClickOpenCPU
+Package: predictMarkov
 Type: Package
 Title: Markov Prediction for OpenCPU
 Version: 0.1.0
-Authors@R: c(person("Mark", "Edmondson",email = "mark@iihnordic.com",
+Authors@R: c(person("Philipp", "Klett",email = "phil@frontend.enginerring",
                   role = c("aut", "cre")))
-Description: OpenCPU calls this to predict the next pageview
+Description: OpenCPU calls this to predict the next X pageviews
 License: MIT
 Imports:
     clickstream (>= 1.1.5),
