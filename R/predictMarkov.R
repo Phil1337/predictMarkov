@@ -5,7 +5,7 @@
 #' @return The prediction
 #' @import clickstream
 #' @export
-predictMarkov <- function(pageview_names) {
+predictMarkov <- function(pageview_names, distance) {
 
   ## mc loaded on package load
   states <- invisible(clickstream::states(model))
@@ -14,7 +14,7 @@ predictMarkov <- function(pageview_names) {
 
   startPattern <- new("Pattern", sequence = pv_n)
 
-  predict <- predict(model, startPattern)
+  predict <- predict(model, startPattern, dist = distance)
 
   list(page = predict@sequence,
        probability = predict@probability)
