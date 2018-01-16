@@ -7,7 +7,7 @@ Authors@R: c(person("Philipp", "Klett",email = "phil@frontend.enginerring",
 Description: OpenCPU calls this to predict the next X pageviews
 License: MIT
 Imports:
-    clickstream (>= 1.1.5),
+    clickstream (>= 1.2.1),
     stringr (>= 1.0.0),
     markovchain (>= 0.4.4)
 LazyData: TRUE
