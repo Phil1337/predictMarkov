@@ -6,7 +6,8 @@
 #' @import clickstream
 #' @export
 predictMarkov <- function(pageview_names) {
-  ###### TODO: filter pageview_names
+  
+  ## filter pageview_names
   # remove string after and including ?
   pageview_names <- sub("\\?.*","", pageview_names) 
   
@@ -22,7 +23,7 @@ predictMarkov <- function(pageview_names) {
   pageview_names <- sub("/en-US.aspx","/", pageview_names) 
   
   pageview_names[grepl("Ticket-Shop.aspx", pageview_names) == TRUE] <- "/Ticket-Shop.aspx"
-  ###### END TODO
+  ## end filter
 
   ## mc loaded on package load
   states <- invisible(clickstream::states(model))
